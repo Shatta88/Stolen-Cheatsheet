@@ -427,7 +427,7 @@ To find subdomains when pentesting,
 load powershell		#load powershell module into meterpreter
 load kiwi		#load mimikatz into meterpreter
 creds_all		#command to dump all credentails after loading kiwi
-timestomp		#use this to hide or mimic access and creation time of a file. This further covers your tracks. the '-v' options shows the MACE of a file '-f' mimics timestamp of another file #timestomp your_file -f file_to_mimic# and '-b' clanks the timestamp
+timestomp		#use this to hide or mimic access and creation time of a file. This further covers your tracks. the '-v' options shows the MACE of a file '-f' mimics timestamp of another file #timestomp your_file -f file_to_mimic# and '-b' blanks the timestamp
 
 run post/multi/recon/local_exploit_suggester		#background the meterpreter session and run this for privilege escalation. It uses WinPEAS.
 
