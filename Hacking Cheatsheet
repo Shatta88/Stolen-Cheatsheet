@@ -482,3 +482,21 @@ Test WORDPRESS XMLRPC PINGBACK
 curl --data "<?xml version="1.0"?><methodCall><methodName>system.listMethods</methodName><params></params></methodCall>" https://#WORDPRESS_SITE#/xmlrpc.php
 
 
+
+---------------------------------
+1) find a program that can trigger the UAC prompt screen(such as hhupd.exe)
+
+2) select "Show more details"
+
+3) select "Show information about the publisher's certificate"
+
+4) click on the "Issued by" URL link it will prompt a browser interface.
+
+Note: The browser might open in the background so you might have to close the UAC Dialog to see it
+
+5) wait for the site to be fully loaded (you can use even is site doesn't load) & select "save as" to prompt a explorer window for "save as".
+
+6) on the explorer window address path, enter the cmd.exe full path:
+C:\WINDOWS\system32\cmd.exe
+
+7) now you'll have an escalated privileges command prompt. 
